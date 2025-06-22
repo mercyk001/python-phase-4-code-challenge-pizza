@@ -74,6 +74,10 @@ api.add_resource(Pizzas, "/pizzas")
 class RestaurantPizzas(Resource):
     def post(self):
         data = request.get_json()
+
+        if not (1 <= data.get("price", 0) <= 30):
+            return make_response(jsonify({"errors": ["validation errors"]}), 400)
+
         try:
             rp = RestaurantPizza(
                 price=data["price"],
@@ -90,8 +94,8 @@ class RestaurantPizzas(Resource):
                 ))
             ), 201)
 
-        except Exception as e:
-            return make_response(jsonify({"errors": [str(e)]}), 400)
+        except Exception:
+            return make_response(jsonify({"errors": ["validation errors"]}), 400)
 
 api.add_resource(RestaurantPizzas, "/restaurant_pizzas")
 
