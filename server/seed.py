@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#sk!/usr/bin/env python3
 
 from app import app
 from models import db, Restaurant, Pizza, RestaurantPizza
